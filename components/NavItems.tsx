@@ -42,7 +42,8 @@ const NavItems = ({ toggleClick }: { toggleClick?: () => void }) => {
           <img src={user.img} alt={user.name} />
 
           <article>
-            <h2>{user.name}</h2> <h3>{user.email}</h3>{" "}
+            <h2>{user.name}</h2>
+            <h3 className="text-[10px]">{user.email}</h3>{" "}
           </article>
           <button
             className="cursor-pointer"
