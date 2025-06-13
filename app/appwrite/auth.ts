@@ -4,9 +4,13 @@ import { redirect } from "react-router";
 
 export const loginWithGoogle = async () => {
   try {
-    account.createOAuth2Session(OAuthProvider.Google);
+    await account.createOAuth2Session(
+      OAuthProvider.Google,
+      "http://localhost:5173/dashboard", // muvaffaqiyatli login
+      "http://localhost:5173/sign-in" // foydalanuvchi bekor qilsa
+    );
   } catch (error) {
-    console.log("LoginWithGoogle", error);
+    console.log("LoginWithGoogle xatosi:", error);
   }
 };
 export const logOut = async () => {
@@ -102,7 +106,7 @@ export const storeUserData = async () => {
   }
 };
 
-export const getExistingUser = async () => {
+export const getExistingUser = async (id: string) => {
   try {
     const user = await account.get();
     if (!user) return null;

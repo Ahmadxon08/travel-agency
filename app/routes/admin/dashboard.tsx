@@ -1,6 +1,28 @@
 import { Header, StatsCard, TripCards } from "components";
+import { redirect } from "react-router";
+import { getExistingUser, storeUserData } from "~/appwrite/auth";
+import { account } from "~/appwrite/client";
 import { allTrips, dashboardStatus, user } from "~/constants";
+export async function clientLoader() {
+  try {
+    const user = await account.get();
 
+    if (!user.$id) {
+      return redirect("/sign-in");
+    }
+
+    const existingUser = await getExistingUser(user.$id);
+    if (existingUser?.status === "user") {
+      return redirect("/");
+    }
+
+    return existingUser?.$id ? existingUser : await storeUserData();
+  } catch (error) {
+    console.log("Hatolik Dashboard da", error);
+
+    return redirect("/sign-in");
+  }
+}
 const Dashboard = () => {
   const { totalUsers, usersJoined, totalTrips, userRole } = dashboardStatus;
   return (
