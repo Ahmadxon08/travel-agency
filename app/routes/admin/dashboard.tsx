@@ -3,6 +3,8 @@ import { redirect } from "react-router";
 import { getExistingUser, storeUserData } from "~/appwrite/auth";
 import { account } from "~/appwrite/client";
 import { allTrips, dashboardStatus, user } from "~/constants";
+
+import type { Route } from "./+types/dashboard";
 export async function clientLoader() {
   try {
     const user = await account.get();
@@ -23,8 +25,12 @@ export async function clientLoader() {
     return redirect("/sign-in");
   }
 }
-const Dashboard = () => {
+
+const Dashboard = ({ loaderData }: Route.ComponentProps) => {
   const { totalUsers, usersJoined, totalTrips, userRole } = dashboardStatus;
+
+  const user = loaderData as User | null;
+
   return (
     <main className="dashboard wrapper">
       <Header
