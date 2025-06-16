@@ -37,19 +37,6 @@ const Dashboard = ({ loaderData }: Route.ComponentProps) => {
         title={`Welcome ${user.name ?? "Guest"} `}
         des={`Assalomu aleylum`}
       />
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel explicabo
-        quidem fugiat modi dicta repellat optio, magni commodi praesentium ad
-        ducimus sunt quibusdam excepturi delectus officiis tempora! Accusamus
-        accusantium pariatur quisquam deleniti quod corporis est aliquid fugit,
-        minima autem eum, veniam totam mollitia ducimus ipsum quae obcaecati.
-        Quod id explicabo consequatur iure minus qui minima odit adipisci quasi
-        odio recusandae, expedita sint perferendis nobis laborum nam sed
-        necessitatibus, quos maiores laboriosam maxime? Fugiat rem vero
-        obcaecati sint natus earum voluptates quos, suscipit adipisci sed cum
-        ipsum error aspernatur ex ullam repudiandae necessitatibus voluptate
-        iste repellat rerum qui assumenda! Voluptatem, mollitia.
-      </p>
 
       <section className="flex flex-col gap-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
