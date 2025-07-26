@@ -1,5 +1,4 @@
 import { cn } from "lib/utils";
-import React from "react";
 import { Link, NavLink } from "react-router";
 import { sidebarItems } from "~/constants";
 

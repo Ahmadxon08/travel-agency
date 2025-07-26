@@ -6,7 +6,7 @@ export const loginWithGoogle = async () => {
   try {
     await account.createOAuth2Session(
       OAuthProvider.Google,
-      "http://localhost:5173/",
+      "http://localhost:5173/dashboard",
       "http://localhost:5173/sign-in"
     );
   } catch (error) {

@@ -1,40 +1,41 @@
 import { Header, StatsCard, TripCards } from "components";
 import { redirect } from "react-router";
-import { getExistingUser, storeUserData } from "~/appwrite/auth";
+import { getExistingUser, getUser, storeUserData } from "~/appwrite/auth";
 import { account } from "~/appwrite/client";
 import { allTrips, dashboardStatus, user } from "~/constants";
 
 import type { Route } from "./+types/dashboard";
-export async function clientLoader() {
-  try {
-    const user = await account.get();
+// export async function clientLoader() {
+//   try {
+//     const user = await account.get();
 
-    if (!user.$id) {
-      return redirect("/sign-in");
-    }
+//     if (!user?.$id) {
+//       return redirect("/sign-in");
+//     }
 
-    const existingUser = await getExistingUser(user.$id);
-    if (existingUser?.status === "user") {
-      return redirect("/");
-    }
+//     const existingUser = await getExistingUser(user?.$id);
+//     if (existingUser?.status === "user") {
+//       return redirect("/");
+//     }
 
-    return existingUser?.$id ? existingUser : await storeUserData();
-  } catch (error) {
-    console.log("Hatolik Dashboard da", error);
+//     return existingUser?.$id ? existingUser : await storeUserData();
+//   } catch (error) {
+//     console.log("Hatolik Dashboard da", error);
 
-    return redirect("/sign-in");
-  }
-}
+//     return redirect("/sign-in");
+//   }
+// }
 
+const { totalUsers, usersJoined, totalTrips, userRole } = dashboardStatus;
+
+export const clientLoader = async () => await getUser();
 const Dashboard = ({ loaderData }: Route.ComponentProps) => {
-  const { totalUsers, usersJoined, totalTrips, userRole } = dashboardStatus;
-
   const user = loaderData as User | null;
 
   return (
     <main className="dashboard wrapper">
       <Header
-        title={`Welcome ${user.name ?? "Guest"} `}
+        title={`Welcome ${user?.name ?? "Guest"} `}
         des={`Assalomu aleylum`}
       />
 
